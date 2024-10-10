@@ -43,7 +43,7 @@ Identify the number of live machines in 172.16.0.0/24
 Angry IP
 ```
 
-#Enumeration
+# Enumeration
 ```
 1- NetBios enum using windows- 
 in cmd type- nbtstat -a 10.10.10.10 (-a displays NEtBIOS name table)
