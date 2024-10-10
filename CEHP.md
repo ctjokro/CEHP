@@ -42,3 +42,94 @@ OTHER TOOLS
 Identify the number of live machines in 172.16.0.0/24
 Angry IP
 ```
+
+#Enumeration
+1- NetBios enum using windows- 
+in cmd type- nbtstat -a 10.10.10.10 (-a displays NEtBIOS name table)
+2- NetBios enum using nmap- 
+nmap -sV -v --script nbstat.nse 10.10.10.16
+3- SNMP enum using nmap-  
+nmap -sU -p 161 10.10.10.10 (-p 161 is port for SNMP)--> Check if port is open
+snmp-check 10.10.10.10 ( It will show user accounts, processes etc) --> for parrot
+4- DNS enumeration /recon  
+dnsrecon -d www.google.com -z
+5- FTP enum using nmap-  
+nmap -p 21 -A 10.10.10.10 
+6- NetBios enum using enum4linux- 
+enum4linux -u martin -p apple -n 10.10.10.10 (all info)
+enum4linux -u martin -p apple -P 10.10.10.10 (policy info)
+PORTS
+FTP - 21    |   SNMP - 161 & 162   | UDP - 161   |  SMB - 135, 139,  445   |  RDP - 3389   |  NetBIOS 137    
+SAMPLE 2
+SNMP Enumeration
+Tools used to enumerate: Nmap | snmp-check | metasploit
+
+Ex:
+Default UDP ports used by SNMP
+Commands: 
+nmap -sP 192.151.62.0/24  (to get the target ip add)
+nmap -sU 192.151.62.3   (enum the target ip add)
+snmp-check 192.151.62.3 (Get System info)
+
+Identify the processes running on the target machine using Nmap scripts
+List valid community strings of the server using Nmap scripts
+List valid community strings of the server by using snmp_login Metasploit module
+msfconsole
+search snmp
+use auxiliary/scanner/snmp/snmp_login
+show options
+set RHOSTS 192.151.62.3
+exploit
+
+List all the interfaces of the machine. Use appropriate Nmap scripts
+
+SMB Enumeration
+Tools used to enumerate: Nmap | snmp-check | metasploit
+What to HAck? 
+Network File Shares
+Logged in Users details
+Workgroups
+Security level information
+Domain and Services
+
+Ex Commands:
+Enumeration Shares
+nmap <target ip add>
+Find port 445 (SMB using port 445)
+nmap -p 445 --script smb-enum-shares <target ip add>
+
+Enumeration Users
+nmap -p 445 --script smb-enum-users <target ip add>
+nmap -p 445 --script smb-enum-users --script-args smbusername=administrator,smbpassword=smbserver_771 <target ip add>
+
+Enumeration Security Level
+nmap -sC -sV -A -T4 <target ip add>
+
+Enumeration Services
+nmap -p 445 --script smb-enum-services --script-args smbusername=administrator,smbpassword=smbserver_771 <target ip add>
+
+Exploiting RDP Service
+How to Exploit?
+Check for running services on the target and confirm if RDP is running on any open port
+nmap <target ip add>
+Use Metasploit to confirm the services running RDP
+msfconsole -q (to view help commands)
+search rdp
+use auxiliary/scanner/rdp/rdp_scanner
+set RHOSTS 10.5.17.119
+set RPORT 3333
+exploit
+Use Hydra to brute force the login credentials
+(see above on other category for example)
+Use and RDP Tools to login into victim machine
+
+Identify if the website www.certifiedhacker.com allows DNS zone transfer.
+ParrotOS: dig ns www.certifiedhacker.com axfr
+
+Perform LDAP enumeration on the target network and find out how many user accounts are associated with the domain.
+Nmap -p 389 –script ldap-brute –script-args ldap.base=’”cn=users,dc=CEHORG,dc=com”’ 10.10.10.25 (target machine)
+
+Perform an LDAP Search on the Domain Controller machine and find out the latest version of the LDAP protocol
+
+Find the IP address of the machine running SMTP service on 192.168.0.0/24
+nmap -p 25 192.168.0.0/24
