@@ -44,6 +44,7 @@ Angry IP
 ```
 
 #Enumeration
+```
 1- NetBios enum using windows- 
 in cmd type- nbtstat -a 10.10.10.10 (-a displays NEtBIOS name table)
 2- NetBios enum using nmap- 
@@ -133,3 +134,4 @@ Perform an LDAP Search on the Domain Controller machine and find out the latest 
 
 Find the IP address of the machine running SMTP service on 192.168.0.0/24
 nmap -p 25 192.168.0.0/24
+```
