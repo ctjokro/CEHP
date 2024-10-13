@@ -288,13 +288,316 @@ nmap -p389 –sV -iL <target_list>  or nmap -p389 –sV <target_IP> (Find the FQ
 ```
 # Cracking Wi-Fi networks
 ```
-Cracking Wifi Password
-aircrack-ng [pcap file] (For cracking WEP network)
-aircrack-ng -a2 -b [Target BSSID] -w [password_Wordlist.txt] [WP2 PCAP file] (For cracking WPA2 or other networks through the captured .pcap file)
+Cracking Wifi Password using Aircrack-ng (ParrotOS)
+Open Terminal, then:
+
+(For cracking WEP network)
+aircrack-ng [pcap file] 
+
+(For cracking WPA2 or other networks through the captured .pcap file) (You can drag and drop the file after command aircrack-ng -a2 -b [Target BSSID] -w) 
+aircrack-ng -a2 -b [Target BSSID] -w [password_Wordlist.txt] [WP2 PCAP file] 
+
+-a is the technique used to crack the handshake, 2=WPA technique
+-b refers to bssid; replace with the BSSID of the target router
+-w stands for wordlist; provide the path to a wordlist
+
+Target BSSID can be found from the .cap/.pcap file, just double click the file, it will open with Wireshark
+Then on the second screen, find the word BSS id: then you will find the BSSID inside ()
+Then continue the process to ParrotOS, then choose which you are about to crack WEP or WPA2 above
 
 ```
 #  Some extra work 
 ```
 Check RDP enabled after getting ip- nmap -p 3389 -iL ip.txt | grep open (ip.txt contains all the alive hosts from target subnet)
 Check MySQL service running- nmap -p 3306 -iL ip.txt | grep open        (ip.txt contains all the alive hosts from target subnet)
+```
+#  Cryptography 
+```
+TOOLS FOR ENCODE / DECODE
+
+BCTextEncoder (Win)
+Ex: decode the file and extract the ip add of compromised machine
+Encode = Fill up the field form and press Encode 
+Decode = vice versa
+
+Veracrypt (Win)
+Steps:
+Download > Install
+Create Volume > Create an encrypted file container >Standard VeraCrypt volume
+Volume Location (Select File > Desktop > Any file name)
+Next > Leave it default > Add Volume Password > Next > Yes
+Mouse your mouse randomly
+Then Click Format > Exit
+
+To open encrypted file
+Mount by Choose any Volume > Create Volume
+Select File (Encrypted file) > Use the password above you created
+
+CrypTool(Win)
+Decrypted using CrypTool
+Open the app > Go to tab Ecrypt/Decrypt
+Choose Symetric (modern) > Choose the key depend on the questions either RC4 or 
+DES (ECB)
+If on the Q mentioned the key length, then fill it else choose default and click Decrypt
+
+
+Hashmyfiles (For calculating and comparing hashes of files) (Win)
+Simply drag and drop the file to the program
+Pink colour mean data is same, same hash
+White colour mean data is tampered, different data & hash
+
+CryptoForge (For encrypting and decrypting the files)
+
+Cryp tool
+Example to Open the file cryt-128–06encr.hex containing ransom file password
+```
+#  Steganography 
+```
+Snow (Win) (For hiding & extracting hidden data from a text file)
+Download from: darkside.com.au/snow > Install snwdos32.zip > only need SNOW.exe
+Commands (Hidden data):
+Open the folder where the snow installed, then
+SNOW.EXE -C -m “This is secret msg” -p “P@ssword” Secret.txt Hiddensecret.txt
+
+Commands (Extract data):
+SNOW.EXE -C -p “P@ssword” Hiddensecret.txt
+Openstego (Win) (For hiding & extracting hidden data from a image file)
+Open image with Openstego
+Choose Extract data:
+Input stego file: Choose the file image
+Output folder: (choose where you want to save it)
+
+Covert TCP (For hiding data in TCP/IP packet header)
+Download covert_tcp.c from internet 
+(For receiving/listening:)
+./covert_tcp -dest <dest-ip> -source <source-ip> -source_port 9999 -dest_port 8888 -server -file /path/to/file.txt
+
+(For sending:)
+./covert_tcp -dest <dest-ip> -source <source-ip> -source_port 8888 -dest_port9999 -file /path/to/file.txt
+
+How to use:
+Open ParrotOS (On Sender machine)
+sudo su
+cc -o covert_tcp covert_tcp.c
+./covert_tcp -source <Sender machine ip add> -dest <Receiver machine> -source_port 9999 -dest_port 8888 -file secret.txt
+
+Open ParrotOS (On Receiver machine)
+sudo su
+cc -o covert_tcp covert_tcp.c
+./covert_tcp -source <Sender machine ip add> -source_port 8888 -server -file receive.txt
+
+```
+
+#  CVE, CVSS & NVD 
+```
+Ex: Perform a vulnerability scan for the host with ip add 192.168.0.1, what is the CVE score that indicate EOL of web dev language platform.
+
+nmap --Pn --script vuln 192.168.0.1 (scan vulnerability of the target)
+Once got the result, get the CVE id that End of Live and then search the CVE id on google (Here you will get the CVE score)
+
+If EOL most likely the CVE score is 10
+
+```
+
+#  Malware Threats
+ 
+```
+RAT | njRAT | TheftRAT
+It use for control the target machine (find the program from Trojan Types > Remote Access Trojans RAT)
+
+Steps:
+Run njRat on the host
+Click Builder tab (bottom of the screen) > Enter the host ip add (make sure  tick Registry StarUp), then click Build
+Save the .exe > Copy it to Target machine (Use the share folder) 
+Login to Target machine > Run the .exe
+Back to the ATTACKER Machine > Go to NJRAT
+Right click on the machine name and then you can do different options such Manager, Services, RDP, etc
+Create a Trojan Server using: Theef RAT Trojan (Win)
+It allows remote attacker access to the system via port 9871 and 6703
+Steps:
+On the Target Machine: Go to Share folder  (Location: Malware Threats>Trojans Types>RAT) and Run the Server210.exe
+
+On the Attacker Machine: Run Client210.exe
+Add the Target ip add, port 6703 FTP 2968 > Click Connect
+
+Create a Virus using the JPS Virus Maker Tool and Infect the Target System: 
+On the Attacker Machine: Go to the shared folder and find JPS Virus Maker Tool and Create the Virus accordingly.
+On the Target Machine: Run the virus
+
+Other Tools
+MoSucker
+ProRAT
+HTTP RAT
+
+How to use ProRAT
+Open ProRAT > Enter the Target IP add, port 5110 > then click Connect
+Click Search Files (to find the secret.txt, check on .\Users or .\Download)
+
+```
+#  Malware Analysis
+ 
+```
+Is it Keylogger, RAT or Ransomware? How was the system infected? Is it Target or Phishing? 
+How does it communicates with the attacker?
+
+Malware Scanning using Hybrid Analysis (Web)
+
+Perform a Strings Search using BinText (Win) (Malware Analysis Tools > String Searching Tools)
+
+Identify Packaging and Obfuscation Methods using PEid (Win) (Malware Analysis Tools > Static Malware Analysis Tools > Packaging & Obfuscation Tools>PEid)
+Go to Viruses folder and > Use Klez Virus Live
+
+Analyze ELF Executable File using Detect It Easy (DIE) (WIN)
+
+Location: Malware Analysis Tools> Static Malware,... > Packaging and Obfuscation,.. > DIE
+Run DIE
+Then, On the right hand side File info tab, you can find info such as entropy
+
+Other Tools:
+Macro_Pack
+UPX - https://upx.github.io
+ASPPack http://www.aspack.com
+
+Find the Portable Executable (PE) Information of a Malware Executable File using PE Explorer
+
+Identify File Dependencies using Dependency Walker
+Perform Malware Disassembly using OllyDbg
+```
+
+#  IoT 
+```
+Analysing MQTT (IoT)
+Capture and Analyze IoT Traffic
+Setup IoT Brooker > Setup an IoT device simulator > Publish message > Analyze message in Wireshark
+Tool: Bevywise IoT simulator (Win)
+Install MQTTRouter.exe on the Host
+
+Install IoT Simulator.exe on the Target
+Double click runsimulator.bat, it will open the edge for the IoT Simulator portal
+Create New Network
+Add Broker IP Address (Target ip add) > Save
+Create New Device > Give a name & Device id > Save
+Start the network (top right)
+
+Create Topic
+Click + sign to add (top right) > Subscribe to Command 
+(Give Topic a name) > Qos (choose 1)
+
+Run Wireshark
+Select Ethernet (it will start capturing packets)
+
+Goto Target machine > Open Chrome, type http://localhost:8080 (creds: admin admin)
+
+Goto Wireshark, stop the capture > type mqtt on the filter
+Select Publish message
+
+```
+
+
+
+#  MISC 
+```
+Find IP address, Active Host, Ports: 
+Win: ipconfig
+Linux: ifconfig
+
+Find IP Add Using Netdiscover
+TOOLS: ParOS (Always Sudo Su) - NetDiscover
+Netdiscover -r 192.168.77.0/24
+
+
+Linux commands
+Ls = to list
+Nano to input.txt = to modify text input.txt
+
+Scan the host without waiting response  
+Nmap -Pn
+
+pwd (Print Working Directory) 
+cat text.text (To view inside the text file)
+
+Windows commands
+Net user = to verify registered account in a machine 
+
+RDP port 3389
+FTP examples
+Example: 
+Open CMD
+ftp 10.10.10.1 (to connect)
+Then after connected to the FTP, go to the file
+get secret.txt (to get .txt file)
+
+
+Privilege Escalation
+Horizontal Privilege Escalation
+ParrotOS: 
+ssh user1@<target ip> -p 50706
+Response yes > Enter the password
+
+Try find a way to move to ‘user2’, to get the flag in ‘/home/user2/flag.txt’
+cd /home/user2
+Cat flag.txt
+sudo -u user2 /bin/bash (login as user2)
+
+
+
+
+Vertical Privilege Escalation (VPE)
+Ex: You gave a subnet 10.10.0.0/24 and user credentials as well. You are instructed to access the target machine and perform VPE escalation to that user and enter the content of text.txt as the answer.
+nmap -sV -p 22 10.10.0.0/24
+ssh kali@10.10.0.0 (ssh connection)
+Then enter the password
+sudo -l (to list what command you can run)
+sudo -i (use the credentials given)
+cd /
+Find . -name <text.txt> 
+(Once you’ve got the path on where the text.txt is) 
+cat /home/kali/Documents/text.txt
+
+Local Privilege Escalation
+Remote Privilege Escalation
+
+
+
+
+
+
+
+
+
+What are the commands to find the ip address of a Linux and a Windows machine?
+Linux- ifconfig
+Windows- ipconfig
+Which command allows you to manage user accounts on a Windows computer ?
+net user
+What is the Port for Remote Desktop Protocol (RDP) ?
+Port for RDP is TCP 3389
+Write the nmap command to find the OS for the following device, 192.168.16.9 ?
+nmap  -O 192.168.16.9     
+Write the nmap command to find out the services running on port 3000  for the following IP (172.16.20.5) ?
+nmap -sV -p 3000 172.16.20.5
+
+
+RDP
+RDP port 3389
+Ex: Given 4 valid employees, Find Suspicious account
+RDP to the machine
+Open CMD > net user
+The users that not on the list, must be the attacker
+
+Nmap -Pn -p -sV 3389 IP (to find IP add of machine that have RDP port open)
+
+
+Convert Nmap XML file
+Xsltproc <nmap-output.xml> -o <nmap-output.html>
+
+
+MD5 HASH
+Use HashCal (WIN)
+
+NTLM Password Hash Decrypted
+Go to this site: https://md5decrypt.net/en/Ntlm/
+
+Copy and paste the hash keys only after : 
+
 ```
