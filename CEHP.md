@@ -192,6 +192,19 @@ sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="[cookie value that yo
 6.1 In the shell type-   TASKLIST  (to view the tasks)
 6.2 Use systeminfo for windows to get all os version
 6.3 Use uname -a for linux to get os version
+
+NOTES or SHORTCUT:
+sqlmap -h (help list)
+sqlmap -hh (complete help list)
+
+IDOR (View Profile)
+Example:
+After Auth Bypass or use given credentials, go to view profile
+Example: www.test.com/viewprofile.aspx?id=1
+
+Then keep changing the id number until you find the right user!
+
+
 ```
 # Android
 ```
@@ -199,6 +212,27 @@ sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="[cookie value that yo
 2- adb connect IP:5555    (Connect adb with parrot)
 3- adb shell              (Access mobile device on parrot)
 4- pwd --> ls --> cd sdcard --> ls --> cat secret.txt (If you can't find it there then go to Downloads folder using: cd downloads)
+
+ADDITIONAL NOTES:
+adb pull /sdcard/scan (Command to copy folder to your device and create a folder name scan) or
+adb pull /sdcard/scan Desktop/ (Command to copy folder to your device and save it to Desktop)
+
+Sample Q:
+On android device there is a secret code, what is inside the code?
+Scan the environment using namp or zenmap
+Find the host that have port 5555 (Port 5555 is Android)
+
+To check file entropy
+Use command:
+ent -h (to check whether ent already install or not yet) (IF tool not install use this command to install: apt install ent)
+Ent <filename> (To check file entropy)
+
+To obtain the last 4 digits of SHA 384 hash
+Use command:
+sha384sum --help (to check whether ent already install or not yet)
+sha384sum <filename>
+
+
 ```
 # Wireshark
 ```
