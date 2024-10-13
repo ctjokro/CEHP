@@ -239,7 +239,48 @@ sha384sum <filename>
 tcp.flags.syn == 1 and tcp.flags.ack == 0    (How many machines) or Go to statistics IPv4 addresses--> Source and Destination ---> Then you can apply the filter given
 tcp.flags.syn == 1   (Which machine for dos)
 http.request.method == POST   (for passwords) or click tools ---> credentials
-Also
+
+Ex: pcap for DDOS- identify how many total attacking machines
+Then Go to tab statistics > IPv4 statistics--> Source and Destination ---> Then you can paste on the Display filer
+tcp.flags.syn == 1 and tcp.flags.ack == 0
+Result will come out and the most Count will be the attacker ip add, so if you have Source ip add that have 3 digits Count, those most likely your attacker machines
+Ex: pcap for DOS- identify attacking ip
+COPY:
+tcp.flags.syn == 1   (Which machine for dos) OR tcp.flags.syn == 1 and tcp.flags.ack == 0
+Then Go to tab statistics > IPv4 statistics--> Source and Destination ---> Then you can paste on the Display filer
+
+Result will come out and the most Count Source IPv4 Addresses will be the attacker ip add, so if you have Source ip add that have 3 digits Count, those most likely your attacker machines
+
+
+Ex: DOS pcap file for login credentials
+Retrieve username and password from Wireshark
+Run Wireshark, then paste below on the filter field.
+http.request.method == POST   (for passwords) or click tools ---> credentials
+
+Click on the result and then click Hypertext Transfer Protocol OR right click > Follow > TCP Stream
+
+Ex: Find a text file
+Go to File > Export Objects > HTTP
+Sort it using Content Type
+Once found the file, you can Save it by click the Save button on the bottom right
+
+Ex: Find a comment
+Select the file and go to bottom left, there’s an icon with notepad and pen
+
+Ex: Find/Search String
+Ctrl F
+Then an option String will appear at the top, then you can fill up what you want to search (its case sensitive)
+Ex: Analyse DOS attack
+Review the tab info
+Go to Statistic tab > Conversations 
+Filter by bytes (find the highest Bytes
+
+Ex Scenario
+If .pcapng given, then the steps will be:
+Open Wireshark > Open recent file (find the file given and open it)
+Go to Statistic tab > Conversations
+Go to IPv4 tab > sort it by Packets
+Then the highest value of packets will be most likely the IP address A of the source of Attacker (or Address B the source of Target)  
 ```
 # Find FQDN
 ```
