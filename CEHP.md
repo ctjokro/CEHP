@@ -19,8 +19,9 @@ nmap --script smb-os-discovery.nse 192.168.12.22
 nmap -g 80 10.10.10.10
 9- nmap -sn 192.168.9.0/24 (Identify the number of host is up or not)
 10- nmap -sC -sV -p- -A -v -T4 192.168.9.0/24 (Find Ver. Open Ports)
-11- nmap -sC -sV -p- -O -v -A -T4 192.168.9.0/24
+11- nmap -sC -sV -p- -O -v -A -T4 192.168.9.0/24 (Scripts + Version + Ports + OS Scan)
 12- nmap -p 22 -sV 192.168.0.0/24 (Identify version of OpenSSH)
+13- nmap -Pn -p -sV 3389 IP (Find IP address of machine with Remote Desktop service)
 
 Nmap provides a wide range of options that control every aspect of its operation. Some of the most commonly used options include:
 -p: Specifies which ports you want to scan. You can list individual ports separated by commas or use ranges separated by dashes.
@@ -45,13 +46,10 @@ Angry IP
 
 # Enumeration
 ```
-1- NetBios enum using windows- 
-in cmd type- nbtstat -a 10.10.10.10 (-a displays NEtBIOS name table)
-2- NetBios enum using nmap- 
-nmap -sV -v --script nbstat.nse 10.10.10.16
-3- SNMP enum using nmap-  
-nmap -sU -p 161 10.10.10.10 (-p 161 is port for SNMP)--> Check if port is open
-snmp-check 10.10.10.10 ( It will show user accounts, processes etc) --> for parrot
+1- NetBios enum using windows- in cmd type- nbtstat -a 10.10.10.10 (-a displays NEtBIOS name table)
+2- NetBios enum using nmap- nmap -sV -v --script nbstat.nse 10.10.10.16
+3- SNMP enum using nmap-  nmap -sU -p 161 10.10.10.10 (-p 161 is port for SNMP)--> Check if port is open
+                               snmp-check 10.10.10.10 ( It will show user accounts, processes etc) --> for parrot
 4- DNS enumeration /recon  
 dnsrecon -d www.google.com -z
 5- FTP enum using nmap-  
