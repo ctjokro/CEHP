@@ -492,7 +492,21 @@ Goto Wireshark, stop the capture > type mqtt on the filter
 Select Publish message
 
 ```
+#  OpenVAS
+```
+Ex1. Perform vulnerability scanning using OpenVAS and identify the number of vulnerabilities?
+Open Parrot OS > Application and search for OpenVAS
 
+Ex2.Perform vulnerability for webserver and identify the severity of RPC?
+Host > click the host
+Under Source > Click Report link 
+On the icons , find corresponding vulnerabilities 
+Find RPC
+
+Ex3.Perform vulnerability on Linux host network using OpenVAS and find how many vulnerability?
+Scan the network using nmap to find the host that using Linux, once you find the ip address, use openVAS to do vulnerability scan (Click the wizard icon at top left, then enter the ip address)
+Once Scan completed, Click Done > click Results tab
+```
 
 
 #  MISC 
@@ -504,7 +518,6 @@ Linux: ifconfig
 Find IP Add Using Netdiscover
 TOOLS: ParOS (Always Sudo Su) - NetDiscover
 Netdiscover -r 192.168.77.0/24
-
 
 Linux commands
 Ls = to list
@@ -527,7 +540,6 @@ ftp 10.10.10.1 (to connect)
 Then after connected to the FTP, go to the file
 get secret.txt (to get .txt file)
 
-
 Privilege Escalation
 Horizontal Privilege Escalation
 ParrotOS: 
@@ -538,9 +550,6 @@ Try find a way to move to ‘user2’, to get the flag in ‘/home/user2/flag.tx
 cd /home/user2
 Cat flag.txt
 sudo -u user2 /bin/bash (login as user2)
-
-
-
 
 Vertical Privilege Escalation (VPE)
 Ex: You gave a subnet 10.10.0.0/24 and user credentials as well. You are instructed to access the target machine and perform VPE escalation to that user and enter the content of text.txt as the answer.
@@ -557,14 +566,6 @@ cat /home/kali/Documents/text.txt
 Local Privilege Escalation
 Remote Privilege Escalation
 
-
-
-
-
-
-
-
-
 What are the commands to find the ip address of a Linux and a Windows machine?
 Linux- ifconfig
 Windows- ipconfig
@@ -577,7 +578,6 @@ nmap  -O 192.168.16.9
 Write the nmap command to find out the services running on port 3000  for the following IP (172.16.20.5) ?
 nmap -sV -p 3000 172.16.20.5
 
-
 RDP
 RDP port 3389
 Ex: Given 4 valid employees, Find Suspicious account
@@ -587,10 +587,8 @@ The users that not on the list, must be the attacker
 
 Nmap -Pn -p -sV 3389 IP (to find IP add of machine that have RDP port open)
 
-
 Convert Nmap XML file
 Xsltproc <nmap-output.xml> -o <nmap-output.html>
-
 
 MD5 HASH
 Use HashCal (WIN)
@@ -599,5 +597,4 @@ NTLM Password Hash Decrypted
 Go to this site: https://md5decrypt.net/en/Ntlm/
 
 Copy and paste the hash keys only after : 
-
 ```
