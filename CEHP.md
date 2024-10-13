@@ -141,3 +141,21 @@ nmap -p 25 192.168.0.0/24
 2- To Display Hidden Data- snow -C -p "magic" readme2.txt (then it will show the content of readme2.txt content)
 3- Image Stegnography using Openstego- PRACTICE ??
 ```
+#  Sniffing
+```
+1- Password Sniffing using Wireshark- In pcap file apply filter: http.request.method==POST (you will get all the post request) Now to capture password click on edit in menu bar, then near Find packet section, on the "display filter" select "string", also select "Packet details" from the drop down of "Packet list", also change "narrow & wide" to "Narrow UTF-8 & ASCII", and then type "pwd" in the find section.
+```
+#  Hacking Web Servers
+```
+1- Footprinting web server Using Netcat and Telnet- nc -vv www.movies.com 80
+						    GET /HTTP/1.0
+						    telnet www.movies.com 80
+						    GET /HTTP/1.0
+2- Enumerate Web server info using nmap-  nmap -sV --script=http-enum www.movies.com
+3- Crack FTP credentials using nmap-  nmap -p 21 10.10.10.10 (check if it is open or not)
+				      ftp 10.10.10.10 (To see if it is directly connecting or needing credentials)
+Then go to Desktop and in Ceh tools folder you will find wordlists, here you will find usernames and passwords file.
+Now in terminal type-  hydra -L /home/attacker/Desktop/CEH_TOOLS/Wordlists/Username.txt -P /home/attacker/Desktop/CEH_TOOLS/Wordlists/Password.txt ftp://10.10.10.10
+
+hydra -l user -P passlist.txt ftp://10.10.10.10
+```
