@@ -135,3 +135,9 @@ Perform an LDAP Search on the Domain Controller machine and find out the latest 
 Find the IP address of the machine running SMTP service on 192.168.0.0/24
 nmap -p 25 192.168.0.0/24
 ```
+#  Quick Overview (Stegnography) --> Snow , Openstego
+```
+1- Hide Data Using Whitespace Stegnography- snow -C -m "My swiss account number is 121212121212" -p "magic" readme.txt readme2.txt  (magic is password and your secret is stored in readme2.txt along with the content of readme.txt)
+2- To Display Hidden Data- snow -C -p "magic" readme2.txt (then it will show the content of readme2.txt content)
+3- Image Stegnography using Openstego- PRACTICE ??
+```
