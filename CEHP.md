@@ -315,12 +315,12 @@ Check MySQL service running- nmap -p 3306 -iL ip.txt | grep open        (ip.txt 
 ```
 TOOLS FOR ENCODE / DECODE
 
-BCTextEncoder (Win)
+BCTextEncoder (Win) For encoding and decoding text in file (.hex)
 Ex: decode the file and extract the ip add of compromised machine
 Encode = Fill up the field form and press Encode 
 Decode = vice versa
 
-Veracrypt (Win)
+Veracrypt (Win) For hiding and Encrypting the disk partitions
 Steps:
 Download > Install
 Create Volume > Create an encrypted file container >Standard VeraCrypt volume
@@ -333,7 +333,7 @@ To open encrypted file
 Mount by Choose any Volume > Create Volume
 Select File (Encrypted file) > Use the password above you created
 
-CrypTool(Win)
+CrypTool(Win) For encryption/decryption of the hex data - by manipulating the key length
 Decrypted using CrypTool
 Open the app > Go to tab Ecrypt/Decrypt
 Choose Symetric (modern) > Choose the key depend on the questions either RC4 or 
