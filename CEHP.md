@@ -402,7 +402,7 @@ If EOL most likely the CVE score is 10
 #  Malware Threats
  
 ```
-RAT | njRAT | TheftRAT
+RAT | njRAT | Theef RAT | MoSucker | ProRat | HTTP RAT
 It use for control the target machine (find the program from Trojan Types > Remote Access Trojans RAT)
 
 Steps:
